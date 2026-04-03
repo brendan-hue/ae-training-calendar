@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AE Training Program Calendar | Vitable Health</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #003C32;
+    --plum: #682C46;
+    --mint: #BFF4C8;
+    --card-gray: #E5E7F0;
+    --cream: #FBF9F4;
+    --white: #FFFFFF;
+    --text-primary: #1A1A1A;
+    --text-secondary: #5A5A5A;
+    --text-light: #8A8A8A;
+    --border: #E0DDD7;
+    --shadow: 0 2px 12px rgba(0,60,50,0.08);
+    --shadow-hover: 0 4px 20px rgba(0,60,50,0.14);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-primary);
+    line-height: 1.6;
+    padding: 0;
+  }
+
+  /* Header */
+  .header {
+    background: var(--teal);
+    color: var(--white);
+    padding: 40px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: rgba(191,244,200,0.08);
+    border-radius: 50%;
+  }
+  .header-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.4rem;
+    font-weight: 400;
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+  }
+  .header .subtitle {
+    font-size: 1rem;
+    opacity: 0.7;
+    font-weight: 400;
+  }
+  .header-meta {
+    display: flex;
+    gap: 32px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  .header-meta .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    opacity: 0.85;
+  }
+  .meta-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--mint);
+    flex-shrink: 0;
+  }
+
+  /* Container */
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px 48px 60px;
+  }
+
+  /* Section headers */
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: var(--teal);
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+  .section-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+
+  /* Cohort Cards */
+  .cohorts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  .cohort-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+    border-top: 4px solid var(--teal);
+    transition: box-shadow 0.2s;
+  }
+  .cohort-card:hover { box-shadow: var(--shadow-hover); }
+  .cohort-card.cohort-b { border-top-color: var(--plum); }
+  .cohort-card.cohort-c { border-top-color: #D4A574; }
+  .cohort-card.cohort-d { border-top-color: var(--text-light); }
+
+  .cohort-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .cohort-card:not(.cohort-b):not(.cohort-c):not(.cohort-d) .cohort-label { color: var(--teal); }
+  .cohort-b .cohort-label { color: var(--plum); }
+  .cohort-c .cohort-label { color: #D4A574; }
+  .cohort-d .cohort-label { color: var(--text-light); }
+
+  .cohort-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    margin-bottom: 2px;
+    color: var(--text-primary);
+  }
+  .cohort-card .cohort-status {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 14px;
+  }
+  .rep-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .rep-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+  .rep-tag .initials {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: var(--white);
+    flex-shrink: 0;
+  }
+  .rep-tag .initials { background: var(--teal); }
+
+  .cohort-card .weeks-remaining {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .weeks-badge {
+    background: var(--mint);
+    color: var(--teal);
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 10px;
+  }
+
+  /* Ownership legend */
+  .ownership-bar {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    padding: 18px 24px;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+  }
+  .owner-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    font-weight: 500;
+  }
+  .owner-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .owner-brendan { background: var(--teal); }
+  .owner-olivia { background: var(--plum); }
+  .owner-mentor { background: #D4A574; }
+  .owner-self { background: var(--card-gray); }
+
+  /* Timeline */
+  .timeline-section { margin-bottom: 40px; }
+
+  .week-row {
+    background: var(--white);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .week-row:hover { box-shadow: var(--shadow-hover); }
+
+  .week-header {
+    display: flex;
+    align-items: center;
+    padding: 16px 24px;
+    cursor: pointer;
+    user-select: none;
+    gap: 16px;
+  }
+  .week-header:hover { background: rgba(0,60,50,0.02); }
+
+  .week-number {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--white);
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  .week-info { flex: 1; }
+  .week-info h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+  }
+  .week-dates {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+  }
+
+  .week-cohorts {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .cohort-pip {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 3px 10px;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
+  .pip-a { background: rgba(0,60,50,0.1); color: var(--teal); }
+  .pip-b { background: rgba(104,44,70,0.1); color: var(--plum); }
+  .pip-c { background: rgba(212,165,116,0.15); color: #8B6914; }
+  .pip-d { background: rgba(138,138,138,0.15); color: var(--text-secondary); }
+
+  .week-chevron {
+    width: 20px; height: 20px;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+    color: var(--text-light);
+  }
+  .week-row.open .week-chevron { transform: rotate(180deg); }
+
+  .week-detail {
+    display: none;
+    padding: 0 24px 20px;
+    border-top: 1px solid var(--border);
+  }
+  .week-row.open .week-detail { display: block; }
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    padding-top: 16px;
+  }
+
+  .detail-block h5 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-light);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .detail-block ul {
+    list-style: none;
+    font-size: 0.85rem;
+    line-height: 1.8;
+  }
+  .detail-block li {
+    position: relative;
+    padding-left: 16px;
+  }
+  .detail-block li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 10px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--mint);
+  }
+
+  .cert-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--mint);
+    color: var(--teal);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 8px;
+    margin-top: 8px;
+  }
+
+  .owner-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .tag-brendan { background: rgba(0,60,50,0.1); color: var(--teal); }
+  .tag-olivia { background: rgba(104,44,70,0.1); color: var(--plum); }
+  .tag-mentor { background: rgba(212,165,116,0.15); color: #8B6914; }
+  .tag-self { background: var(--card-gray); color: var(--text-secondary); }
+
+  /* Mentor Grid */
+  .mentor-section { margin-bottom: 40px; }
+  .mentor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .mentor-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .mentor-card .new-rep-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .mentor-card .mentor-assign {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: var(--cream);
+    border: 2px dashed var(--border);
+    border-radius: 10px;
+    font-size: 0.82rem;
+    color: var(--text-light);
+    font-style: italic;
+  }
+  .mentor-card .mentor-assign.filled {
+    border-style: solid;
+    border-color: var(--teal);
+    background: rgba(0,60,50,0.04);
+    color: var(--teal);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  .mentor-select {
+    width: 100%;
+    padding: 10px 14px;
+    background: rgba(0,60,50,0.04);
+    border: 2px solid var(--teal);
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--teal);
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23003C32' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+  .mentor-select:hover {
+    background-color: rgba(0,60,50,0.08);
+  }
+  .mentor-select:focus {
+    outline: none;
+    border-color: var(--plum);
+    box-shadow: 0 0 0 3px rgba(104,44,70,0.12);
+  }
+
+  /* Cert Tracker */
+  .cert-tracker {
+    background: var(--white);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+  .cert-tracker table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .cert-tracker th {
+    background: var(--teal);
+    color: var(--white);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 12px 16px;
+    text-align: center;
+    font-weight: 600;
+  }
+  .cert-tracker th:first-child {
+    text-align: left;
+    min-width: 180px;
+  }
+  .cert-tracker td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+    font-size: 0.85rem;
+  }
+  .cert-tracker td:first-child {
+    text-align: left;
+    font-weight: 500;
+  }
+  .cert-tracker tr:last-child td { border-bottom: none; }
+  .cert-tracker tr:hover { background: rgba(0,60,50,0.02); }
+
+  .status-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    font-size: 0.7rem;
+  }
+  .status-complete {
+    background: var(--mint);
+    color: var(--teal);
+  }
+  .status-current {
+    background: rgba(212,165,116,0.2);
+    color: #8B6914;
+    border: 2px solid #D4A574;
+  }
+  .status-upcoming {
+    background: var(--card-gray);
+    color: var(--text-light);
+  }
+  .status-na {
+    color: var(--text-light);
+    font-size: 0.75rem;
+  }
+
+  /* Notes */
+  .notes-box {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--plum);
+  }
+  .notes-box h4 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    color: var(--plum);
+    margin-bottom: 10px;
+  }
+  .notes-box ul {
+    list-style: none;
+    font-size: 0.88rem;
+    line-height: 1.9;
+  }
+  .notes-box li {
+    padding-left: 18px;
+    position: relative;
+  }
+  .notes-box li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 11px;
+    width: 8px; height: 2px;
+    background: var(--plum);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .header { padding: 28px 20px; }
+    .header h1 { font-size: 1.6rem; }
+    .container { padding: 20px; }
+    .week-header { padding: 12px 16px; }
+    .cohorts-grid { grid-template-columns: 1fr; }
+    .detail-grid { grid-template-columns: 1fr; }
+    .cert-tracker { overflow-x: auto; }
+  }
+
+  @media print {
+    .week-row.open .week-detail { display: block; }
+    .week-chevron { display: none; }
+    body { background: white; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-inner">
+    <h1>AE Training Program Calendar</h1>
+    <div class="subtitle">New Hire Onboarding Schedule - Q2 2026</div>
+    <div class="header-meta">
+      <div class="meta-item"><span class="meta-dot"></span> 9 reps across 4 cohorts</div>
+      <div class="meta-item"><span class="meta-dot"></span> 8-week program</div>
+      <div class="meta-item"><span class="meta-dot"></span> 5 certifications</div>
+      <div class="meta-item"><span class="meta-dot"></span> Updated April 3, 2026</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Cohort Overview -->
+  <div style="margin-bottom: 40px;">
+    <div class="section-title">Cohort Overview</div>
+    <div class="section-subtitle">Four staggered groups moving through the 8-week AE Playbook V3 program</div>
+
+    <div class="cohorts-grid">
+      <!-- Cohort A -->
+      <div class="cohort-card">
+        <div class="cohort-label">Cohort A</div>
+        <h3>Advanced Group</h3>
+        <div class="cohort-status">Completed Weeks 1-4 - Starting Week 5 on Apr 7</div>
+        <ul class="rep-list">
+          <li><span class="rep-tag"><span class="initials">SD</span> Sydney DeGiacomo</span></li>
+          <li><span class="rep-tag"><span class="initials">DC</span> Derek Colantuono</span></li>
+          <li><span class="rep-tag"><span class="initials">KP</span> Katrina Przyblowicz</span></li>
+          <li><span class="rep-tag"><span class="initials">CP</span> Caleb Potaczek</span></li>
+        </ul>
+        <div class="weeks-remaining">
+          <span>4 weeks remaining (Wk 5-8)</span>
+          <span class="weeks-badge">Graduates May 2</span>
+        </div>
+      </div>
+
+      <!-- Cohort B -->
+      <div class="cohort-card cohort-b">
+        <div class="cohort-label">Cohort B</div>
+        <h3>Mid-Program Group</h3>
+        <div class="cohort-status">Completed Weeks 1-2 - Starting Week 3 on Apr 7</div>
+        <ul class="rep-list">
+          <li><span class="rep-tag"><span class="initials">MV</span> Mackenzie Voelker</span></li>
+          <li><span class="rep-tag"><span class="initials">SO</span> Sovannary Ouk</span></li>
+        </ul>
+        <div class="weeks-remaining">
+          <span>6 weeks remaining (Wk 3-8)</span>
+          <span class="weeks-badge">Graduates May 16</span>
+        </div>
+      </div>
+
+      <!-- Cohort C -->
+      <div class="cohort-card cohort-c">
+        <div class="cohort-label">Cohort C</div>
+        <h3>SDR Promotions</h3>
+        <div class="cohort-status">Promoted Apr 7 - Joining Cohort B schedule at Week 3 (skip Wk 1-2)</div>
+        <ul class="rep-list">
+          <li><span class="rep-tag"><span class="initials">AS</span> Alex Sacharow</span></li>
+          <li><span class="rep-tag"><span class="initials">DS</span> Davonte Scrafe</span></li>
+        </ul>
+        <div class="weeks-remaining">
+          <span>6 weeks on schedule (Wk 3-8)</span>
+          <span class="weeks-badge">Graduates May 16</span>
+        </div>
+      </div>
+
+      <!-- Cohort D -->
+      <div class="cohort-card cohort-d">
+        <div class="cohort-label">Cohort D</div>
+        <h3>May Start</h3>
+        <div class="cohort-status">Starts May 12 - Full 8-week program</div>
+        <ul class="rep-list">
+          <li><span class="rep-tag"><span class="initials">NT</span> Nael Termanini</span></li>
+        </ul>
+        <div class="weeks-remaining">
+          <span>Full 8 weeks (Wk 1-8)</span>
+          <span class="weeks-badge">Graduates Jul 3</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Training Ownership -->
+  <div class="ownership-bar">
+    <div class="owner-item"><span class="owner-dot owner-brendan"></span> Brendan - Training Lead</div>
+    <div class="owner-item"><span class="owner-dot owner-olivia"></span> Olivia - Support / Backup</div>
+    <div class="owner-item"><span class="owner-dot owner-mentor"></span> Assigned Mentor (Existing AE)</div>
+    <div class="owner-item"><span class="owner-dot owner-self"></span> Self-Study / Shadow</div>
+  </div>
+
+  <!-- Mentor Assignments -->
+  <div class="mentor-section">
+    <div class="section-title">Mentor Assignments</div>
+    <div class="section-subtitle" id="mentor-counts">Olivia Berens (4) - Marissa Makar (2) - Jeremy Lopez (2) - Carolina Castellanos (1)</div>
+    <div class="mentor-grid">
+      <div class="mentor-card">
+        <div class="new-rep-name">Sydney DeGiacomo <span style="font-size:0.75rem;color:var(--text-light);">Cohort A</span></div>
+        <select class="mentor-select" onchange="updateCounts()">
+          <option value="">Select mentor...</option>
+          <option value="TBD">TBD</option>
+          <option value="Olivia Berens" selected>Olivia Berens</option>
+          <option value="Marissa Makar">Marissa Makar</option>
+          <option value="Jeremy Lopez">Jeremy Lopez</option>
+          <option value="Carolina Castellanos">Carolina Castellanos</option>
+        </select>
+      </div>
+      <div class="mentor-card">
+        <div class="new-rep-name">Derek Colantuono <span style="font-size:0.75rem;color:var(--text-light);">Cohort A</span></div>
+        <select class="mentor-select" onchange="updateCounts()">
+          <option value="">Select mentor...</option>
+          <option value="TBD">TBD</option>
+          <option value="Olivia Berens">Olivia Berens</option>
+          <option value="Marissa Makar" selected>Marissa Makar</option>
+          <option value="Jeremy Lopez">Jeremy Lopez</option>
+          <option value="Carolina Castellanos">Carolina Castellanos</option>
+        </select>
+      </div>
+      <div class="mentor-card">
+        <div class="new-rep-name">Katrina Przyblowicz <span style="font-size:0.75rem;color:var(--text-light);">Cohort A</span></div>
+        <select class="mentor-select" onchange="updateCounts()">
+          <option value="">Select mentor...</option>
+          <option value="TBD">TBD</option>
+          <option value="Olivia Berens">Olivia Berens</option>
+          <option value="Marissa Makar">Marissa Makar</option>
+          <option value="Jeremy Lopez" selected>Jeremy Lopez</option>
+          <option value="Carolina Castellanos">Carolina Castellanos</option>
+        </select>
+      </div>
+      <div class="mentor-card">
+        <div class="new-rep-name">Caleb Potaczek <span style="font-size:0.75rem;color:var(--text-light);">Cohort A</span></div>
+        <select class="mentor-select" onchange="updateCounts()">
+          <option value="">Select mentor...</option>
+          <option value="TBD">TBD</option>
+          <option value="Olivia Berens">Olivia Berens</option>
+          <option value="Marissa Makar">Marissa Makar</option>
+          <option value="Jeremy Lopez" selected>Jeremy Lopez</option>
+          <option value="Carolina Castellanos">Carolina Castellanos</option>
+        </select>
+      </div>
+      <div class="mentor-card">
+        <div class="new-rep-name">Mackenzie Voelker <span style="font-size:0.75rem;color:var(--text-light);">Cohort B</span></div>
+        <select class="mentor-select" onchange="updateCounts()">
+          <option value="">Select mentor...</option>
+          <option value="TBD">TBD</option>
+          <option value="Olivia Berens">Olivia Berens</option>
+          <option value="Marissa Makar" selected>Marissa Makar</option>
+          <option value="Jeremy Lopez">Jeremy Lopez</option>
+          <option value="Carolina Castellanos">Carolina Castellanos</option>
+        </select>
+      </div>
+      <div class="mentor-card">
+        <div class="new-rep-name">Sovannary Ouk <span style="font-size:0.75rem;color:var(--text-light);">Cohort B</span></div>
+        <select class="mentor-select" onchange="updateCounts()">
+          <option value="">Select mentor...</option>
+          <option value="TBD">TBD</option>
+          <option value="Olivia Berens">Olivia Berens</option>
+          <option value="Marissa Makar">Marissa Makar</option>
+          <option value="Jeremy Lopez">Jeremy Lopez</option>
+          <option value="Carolina Castellanos" selected>Carolina Castellanos</option>
+        </select>
+      </div>
+      <div class="mentor-card">
+        <div class="new-rep-name">Alex Sacharow <span style="font-size:0.75rem;color:var(--text-light);">Cohort C - SDR Promo</span></div>
+        <select class="mentor-select" onchange="updateCounts()">
+          <option value="">Select mentor...</option>
+          <option value="TBD">TBD</option>
+          <option value="Olivia Berens" selected>Olivia Berens</option>
+          <option value="Marissa Makar">Marissa Makar</option>
+          <option value="Jeremy Lopez">Jeremy Lopez</option>
+          <option value="Carolina Castellanos">Carolina Castellanos</option>
+        </select>
+      </div>
+      <div class="mentor-card">
+        <div class="new-rep-name">Davonte Scrafe <span style="font-size:0.75rem;color:var(--text-light);">Cohort C - SDR Promo</span></div>
+        <select class="mentor-select" onchange="updateCounts()">
+          <option value="">Select mentor...</option>
+          <option value="TBD">TBD</option>
+          <option value="Olivia Berens" selected>Olivia Berens</option>
+          <option value="Marissa Makar">Marissa Makar</option>
+          <option value="Jeremy Lopez">Jeremy Lopez</option>
+          <option value="Carolina Castellanos">Carolina Castellanos</option>
+        </select>
+      </div>
+      <div class="mentor-card">
+        <div class="new-rep-name">Nael Termanini <span style="font-size:0.75rem;color:var(--text-light);">Cohort D - May 12</span></div>
+        <select class="mentor-select" onchange="updateCounts()">
+          <option value="">Select mentor...</option>
+          <option value="TBD">TBD</option>
+          <option value="Olivia Berens" selected>Olivia Berens</option>
+          <option value="Marissa Makar">Marissa Makar</option>
+          <option value="Jeremy Lopez">Jeremy Lopez</option>
+          <option value="Carolina Castellanos">Carolina Castellanos</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week-by-Week Timeline -->
+  <div class="timeline-section">
+    <div class="section-title">Week-by-Week Training Calendar</div>
+    <div class="section-subtitle">Click each week to expand daily activities, session owners, and deliverables</div>
+
+    <!-- WEEK OF APR 7-11 -->
+    <div class="week-row open" onclick="this.classList.toggle('open')">
+      <div class="week-header">
+        <div class="week-number">5</div>
+        <div class="week-info">
+          <h4>Pricing, Closing, & Negotiating</h4>
+          <div class="week-dates">April 7 - 11, 2026</div>
+        </div>
+        <div class="week-cohorts">
+          <span class="cohort-pip pip-a">Cohort A - Wk 5</span>
+        </div>
+        <svg class="week-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="week-detail">
+        <div class="detail-grid">
+          <div class="detail-block">
+            <h5>Cohort A - Daily Schedule</h5>
+            <ul>
+              <li>Day 1: The 5-Minute Drill / Closing Framework <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Day 2: The Three Levers of Negotiation <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Day 3: Plans & Pricing Deep Dive <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Day 4: Competitors <span class="owner-tag tag-olivia">Olivia</span></li>
+              <li>Day 5: Closing Cert <span class="owner-tag tag-brendan">Brendan</span></li>
+            </ul>
+            <div class="cert-badge">Closing Certification - End of Week</div>
+          </div>
+          <div class="detail-block">
+            <h5>Key Deliverables</h5>
+            <ul>
+              <li>Run all phases of the 5-Minute Drill without prompting</li>
+              <li>Articulate and apply the Three Levers of Negotiation</li>
+              <li>Handle "I need to think about it" without caving on price</li>
+              <li>Pass Closing Certification (4+ stars)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Also APR 7-11 for Cohort B/C -->
+    <div class="week-row" onclick="this.classList.toggle('open')">
+      <div class="week-header">
+        <div class="week-number" style="background: var(--plum)">3</div>
+        <div class="week-info">
+          <h4>Presentation</h4>
+          <div class="week-dates">April 7 - 11, 2026</div>
+        </div>
+        <div class="week-cohorts">
+          <span class="cohort-pip pip-b">Cohort B - Wk 3</span>
+          <span class="cohort-pip pip-c">Cohort C - Wk 3</span>
+        </div>
+        <svg class="week-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="week-detail">
+        <div class="detail-grid">
+          <div class="detail-block">
+            <h5>Cohorts B & C - Daily Schedule</h5>
+            <ul>
+              <li>Day 1: Discovery Recap & Package Recommendation <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Day 2: Vitable Product Deep Dive - VPC, MEC & MEC Plus <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Day 3: Presentation Cert <span class="owner-tag tag-brendan">Brendan</span></li>
+            </ul>
+            <div class="cert-badge">Presentation Certification - Day 3</div>
+          </div>
+          <div class="detail-block">
+            <h5>Key Deliverables</h5>
+            <ul>
+              <li>Deliver Discovery Recap referencing specific prospect pain points</li>
+              <li>Explain VPC, MEC, and MEC Plus clearly and confidently</li>
+              <li>Run full Dashboard Demo (8-10 min)</li>
+              <li>Run App + Coverage Nav Demo (10-12 min)</li>
+              <li>Run Employee Enrollment Demo (8-10 min)</li>
+              <li>Completed full mock presentation with feedback</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <h5>Note for Cohort C (Alex & Davonte)</h5>
+            <ul>
+              <li>SDR promos skip Weeks 1-2 (already have foundation + cold calling skills)</li>
+              <li>May need 1-on-1 catch-up on Discovery frameworks (SPI, Stack Rank)</li>
+              <li>Assign recorded Discovery training modules for self-study</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEEK OF APR 14-18 — Brendan in Philly Mon-Wed -->
+    <div class="week-row" onclick="this.classList.toggle('open')">
+      <div class="week-header">
+        <div class="week-number">6</div>
+        <div class="week-info">
+          <h4>Plans & Pricing <span style="font-size:0.75rem; background:rgba(104,44,70,0.1); color:var(--plum); padding:2px 8px; border-radius:6px; margin-left:8px;">Brendan in Philadelphia Mon-Wed</span></h4>
+          <div class="week-dates">April 14 - 18, 2026</div>
+        </div>
+        <div class="week-cohorts">
+          <span class="cohort-pip pip-a">Cohort A - Wk 6</span>
+        </div>
+        <svg class="week-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="week-detail">
+        <div class="detail-grid">
+          <div class="detail-block">
+            <h5>Mon-Wed (Brendan traveling)</h5>
+            <ul>
+              <li>Mon: Review 2 live proposals from closed deals <span class="owner-tag tag-self">Self-Study</span></li>
+              <li>Tue: Shadow AE walking through live quote <span class="owner-tag tag-mentor">Mentor</span></li>
+              <li>Wed: Pricing Objections Role-Play <span class="owner-tag tag-olivia">Olivia</span></li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <h5>Thu-Fri (Brendan back)</h5>
+            <ul>
+              <li>Thu: Vitable Product Deep Dive - all plan types <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Fri: Building a Quote / Quote-to-Cash Process <span class="owner-tag tag-brendan">Brendan</span></li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <h5>Key Deliverables</h5>
+            <ul>
+              <li>Name every Vitable product and describe who it's best for</li>
+              <li>Build a quote from scratch without help</li>
+              <li>Understand employer contribution options and employee cost impact</li>
+              <li>Handle "your pricing is too high" without discounting reflexively</li>
+              <li>Reviewed at least 2 live proposals from closed deals</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-row" onclick="this.classList.toggle('open')">
+      <div class="week-header">
+        <div class="week-number" style="background: var(--plum)">4</div>
+        <div class="week-info">
+          <h4>Demo Flow & Cert <span style="font-size:0.75rem; background:rgba(104,44,70,0.1); color:var(--plum); padding:2px 8px; border-radius:6px; margin-left:8px;">Brendan in Philadelphia Mon-Wed</span></h4>
+          <div class="week-dates">April 14 - 18, 2026</div>
+        </div>
+        <div class="week-cohorts">
+          <span class="cohort-pip pip-b">Cohort B - Wk 4</span>
+          <span class="cohort-pip pip-c">Cohort C - Wk 4</span>
+        </div>
+        <svg class="week-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="week-detail">
+        <div class="detail-grid">
+          <div class="detail-block">
+            <h5>Mon-Wed (Brendan traveling)</h5>
+            <ul>
+              <li>Mon: Self-study - watch recorded demos, review Dashboard + App on their own <span class="owner-tag tag-self">Self-Study</span></li>
+              <li>Tue: Olivia walks through demo structure + Enrollment Flow overview <span class="owner-tag tag-olivia">Olivia</span></li>
+              <li>Wed: Practice demo runs with mentor feedback <span class="owner-tag tag-mentor">Mentor</span></li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <h5>Thu-Fri (Brendan back)</h5>
+            <ul>
+              <li>Thu: Dashboard Demo + App Demo + Employee Enrollment Demo + Proposal Structure <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Fri: Demo Cert <span class="owner-tag tag-brendan">Brendan</span></li>
+            </ul>
+            <div class="cert-badge">Demo Certification - Friday</div>
+          </div>
+          <div class="detail-block">
+            <h5>Key Deliverables</h5>
+            <ul>
+              <li>Run all 4 phases of the 5-Minute Drill without prompting</li>
+              <li>Pass Demo Certification (4+ stars)</li>
+              <li>Note: Mon-Wed prep means reps come to Thu already familiar with the platform - Brendan's sessions become refinement + cert, not cold introductions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEEK OF APR 21-25 -->
+    <div class="week-row" onclick="this.classList.toggle('open')">
+      <div class="week-header">
+        <div class="week-number">7</div>
+        <div class="week-info">
+          <h4>Post Sale Process / New Clients</h4>
+          <div class="week-dates">April 21 - 25, 2026</div>
+        </div>
+        <div class="week-cohorts">
+          <span class="cohort-pip pip-a">Cohort A - Wk 7</span>
+        </div>
+        <svg class="week-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="week-detail">
+        <div class="detail-grid">
+          <div class="detail-block">
+            <h5>Cohort A - Schedule</h5>
+            <ul>
+              <li>Closed Won Checklist + HubSpot Hygiene <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>CS Handoff Email Process (all product types) <span class="owner-tag tag-olivia">Olivia</span></li>
+              <li>Welcome Call Scheduling + Pitch Deck Build <span class="owner-tag tag-mentor">Mentor</span></li>
+              <li>Client Referral Bonus Program <span class="owner-tag tag-self">Self-Study</span></li>
+              <li>HRA Intake Form + Money Movement (ICHRA) <span class="owner-tag tag-brendan">Brendan</span></li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <h5>Key Deliverables</h5>
+            <ul>
+              <li>Move deal to Closed Won with all required fields</li>
+              <li>CS Handoff Email sent correctly with all parties cc'd</li>
+              <li>Welcome Call scheduled via CSM booking link</li>
+              <li>Welcome Call Pitch Deck built and shared with CSM</li>
+              <li>PandaDoc Revenue Share packet created (if applicable)</li>
+              <li>Sales forecast updated in HubSpot after close</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-row" onclick="this.classList.toggle('open')">
+      <div class="week-header">
+        <div class="week-number" style="background: var(--plum)">5</div>
+        <div class="week-info">
+          <h4>Pricing, Closing, & Negotiating</h4>
+          <div class="week-dates">April 21 - 25, 2026</div>
+        </div>
+        <div class="week-cohorts">
+          <span class="cohort-pip pip-b">Cohort B - Wk 5</span>
+          <span class="cohort-pip pip-c">Cohort C - Wk 5</span>
+        </div>
+        <svg class="week-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="week-detail">
+        <div class="detail-grid">
+          <div class="detail-block">
+            <h5>Cohorts B & C - Daily Schedule</h5>
+            <ul>
+              <li>Day 1: The 5-Minute Drill / Closing Framework <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Day 2: The Three Levers of Negotiation <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Day 3: Plans & Pricing <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Day 4: Competitors <span class="owner-tag tag-olivia">Olivia</span></li>
+              <li>Day 5: Closing Cert <span class="owner-tag tag-brendan">Brendan</span></li>
+            </ul>
+            <div class="cert-badge">Closing Certification - End of Week</div>
+          </div>
+          <div class="detail-block">
+            <h5>Key Deliverables</h5>
+            <ul>
+              <li>Run all phases of the 5-Minute Drill without prompting</li>
+              <li>Articulate and apply the Three Levers of Negotiation</li>
+              <li>Handle "I need to think about it" without caving on price</li>
+              <li>Pass Closing Certification (4+ stars)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEEK OF APR 28 - MAY 2 -->
+    <div class="week-row" onclick="this.classList.toggle('open')">
+      <div class="week-header">
+        <div class="week-number">8</div>
+        <div class="week-info">
+          <h4>Guide to General Processes</h4>
+          <div class="week-dates">April 28 - May 2, 2026</div>
+        </div>
+        <div class="week-cohorts">
+          <span class="cohort-pip pip-a">Cohort A - Wk 8 (Final)</span>
+        </div>
+        <svg class="week-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="week-detail">
+        <div class="detail-grid">
+          <div class="detail-block">
+            <h5>Cohort A - Schedule</h5>
+            <ul>
+              <li>HubSpot Mastery - pipeline, required fields, hygiene <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Cross-Team Workflows: Finance, CS, Legal <span class="owner-tag tag-olivia">Olivia</span></li>
+              <li>Forecasting, Referrals & Reporting <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Mock end-of-week pipeline audit <span class="owner-tag tag-mentor">Mentor</span></li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <h5>Key Deliverables</h5>
+            <ul>
+              <li>Pipeline 100% up to date with no missing fields</li>
+              <li>Knows every Deal Stage and transition triggers</li>
+              <li>Can submit a PandaDoc Revenue Share packet independently</li>
+              <li>Submitted at least one sales forecast in HubSpot</li>
+              <li>Can articulate escalation path for legal, compliance, finance</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-row" onclick="this.classList.toggle('open')">
+      <div class="week-header">
+        <div class="week-number" style="background: var(--plum)">6</div>
+        <div class="week-info">
+          <h4>Plans & Pricing</h4>
+          <div class="week-dates">April 28 - May 2, 2026</div>
+        </div>
+        <div class="week-cohorts">
+          <span class="cohort-pip pip-b">Cohort B - Wk 6</span>
+          <span class="cohort-pip pip-c">Cohort C - Wk 6</span>
+        </div>
+        <svg class="week-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="week-detail">
+        <div class="detail-grid">
+          <div class="detail-block">
+            <h5>Cohorts B & C - Schedule</h5>
+            <ul>
+              <li>Vitable Product Deep Dive - all plan types <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Building a Quote / Quote-to-Cash Process <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Shadow AE walking through live quote <span class="owner-tag tag-mentor">Mentor</span></li>
+              <li>Pricing Objections Role-Play <span class="owner-tag tag-olivia">Olivia</span></li>
+              <li>Practice building mock quote <span class="owner-tag tag-self">Self-Study</span></li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <h5>Key Deliverables</h5>
+            <ul>
+              <li>Name every Vitable product and describe who it's best for</li>
+              <li>Build a quote from scratch without help</li>
+              <li>Understand employer contribution options</li>
+              <li>Handle pricing objections confidently</li>
+              <li>Reviewed at least 2 live proposals from closed deals</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEEK OF MAY 5-9 -->
+    <div class="week-row" onclick="this.classList.toggle('open')">
+      <div class="week-header">
+        <div class="week-number" style="background: var(--plum)">7</div>
+        <div class="week-info">
+          <h4>Post Sale Process / New Clients</h4>
+          <div class="week-dates">May 5 - 9, 2026</div>
+        </div>
+        <div class="week-cohorts">
+          <span class="cohort-pip pip-b">Cohort B - Wk 7</span>
+          <span class="cohort-pip pip-c">Cohort C - Wk 7</span>
+        </div>
+        <svg class="week-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="week-detail">
+        <div class="detail-grid">
+          <div class="detail-block">
+            <h5>Cohorts B & C - Schedule</h5>
+            <ul>
+              <li>Closed Won Checklist + HubSpot Hygiene <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>CS Handoff Email Process (all product types) <span class="owner-tag tag-olivia">Olivia</span></li>
+              <li>Welcome Call Scheduling + Pitch Deck Build <span class="owner-tag tag-mentor">Mentor</span></li>
+              <li>Client Referral Bonus Program <span class="owner-tag tag-self">Self-Study</span></li>
+              <li>HRA Intake Form + Money Movement (ICHRA) <span class="owner-tag tag-brendan">Brendan</span></li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <h5>Key Deliverables</h5>
+            <ul>
+              <li>Move deal to Closed Won with all required fields</li>
+              <li>CS Handoff Email sent correctly</li>
+              <li>Welcome Call scheduled and Pitch Deck built</li>
+              <li>Familiar with Client Referral Bonus program</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEEK OF MAY 12-16 -->
+    <div class="week-row" onclick="this.classList.toggle('open')">
+      <div class="week-header">
+        <div class="week-number" style="background: var(--plum)">8</div>
+        <div class="week-info">
+          <h4>Guide to General Processes</h4>
+          <div class="week-dates">May 12 - 16, 2026</div>
+        </div>
+        <div class="week-cohorts">
+          <span class="cohort-pip pip-b">Cohort B - Wk 8 (Final)</span>
+          <span class="cohort-pip pip-c">Cohort C - Wk 8 (Final)</span>
+        </div>
+        <svg class="week-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="week-detail">
+        <div class="detail-grid">
+          <div class="detail-block">
+            <h5>Cohorts B & C - Schedule</h5>
+            <ul>
+              <li>HubSpot Mastery - pipeline, fields, hygiene <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Cross-Team Workflows: Finance, CS, Legal <span class="owner-tag tag-olivia">Olivia</span></li>
+              <li>Forecasting, Referrals & Reporting <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Mock end-of-week pipeline audit <span class="owner-tag tag-mentor">Mentor</span></li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <h5>Key Deliverables</h5>
+            <ul>
+              <li>Pipeline 100% up to date</li>
+              <li>Knows every Deal Stage and transition triggers</li>
+              <li>Can submit PandaDoc Revenue Share packet independently</li>
+              <li>Submitted at least one sales forecast</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="week-row" onclick="this.classList.toggle('open')">
+      <div class="week-header">
+        <div class="week-number" style="background: var(--text-light)">1</div>
+        <div class="week-info">
+          <h4>Foundation, Prospecting & Cold Outreach</h4>
+          <div class="week-dates">May 12 - 16, 2026</div>
+        </div>
+        <div class="week-cohorts">
+          <span class="cohort-pip pip-d">Cohort D - Wk 1</span>
+        </div>
+        <svg class="week-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="week-detail">
+        <div class="detail-grid">
+          <div class="detail-block">
+            <h5>Cohort D (Nael) - Track 1: Foundation</h5>
+            <ul>
+              <li>Day 1: Tech Setup, Mission, Vision, Values <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Day 2: ICP Deep Dive - Home Healthcare <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Day 3: Vitable Products & Benefit Options <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Day 4: Advanced Tech Stack Setup <span class="owner-tag tag-olivia">Olivia</span></li>
+              <li>Day 5: Pipeline Stages, KPIs & Activity Standards <span class="owner-tag tag-brendan">Brendan</span></li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <h5>Track 2: Prospecting & Cold Calling</h5>
+            <ul>
+              <li>Day 1: Prospecting Mindset & Daily Activity Standards <span class="owner-tag tag-self">Self-Study</span></li>
+              <li>Day 2: ICP Lead Generation & Account Research <span class="owner-tag tag-mentor">Mentor</span></li>
+              <li>Day 3: Cold Call Structure <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Day 4: Problem Statements, Weekend Language <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Day 5: First Live Cold Call Block + Debrief <span class="owner-tag tag-mentor">Mentor</span></li>
+            </ul>
+            <div class="cert-badge">Cold Call Certification - End of Week</div>
+          </div>
+          <div class="detail-block">
+            <h5>Key Deliverables</h5>
+            <ul>
+              <li>Recite Vitable's mission from memory</li>
+              <li>Describe home care ICP in detail</li>
+              <li>Explain MEC, MEC Plus, VPC, ICHRA at a high level</li>
+              <li>HubSpot, Slack, Google Calendar fully set up</li>
+              <li>Name all pipeline stages in order</li>
+              <li>Complete 30+ cold calls this week</li>
+              <li>Build prospecting list of 100+ home care accounts</li>
+              <li>Pass Cold Call Certification</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEEK OF MAY 19-23 -->
+    <div class="week-row" onclick="this.classList.toggle('open')">
+      <div class="week-header">
+        <div class="week-number" style="background: var(--text-light)">2</div>
+        <div class="week-info">
+          <h4>Discovery</h4>
+          <div class="week-dates">May 19 - 23, 2026</div>
+        </div>
+        <div class="week-cohorts">
+          <span class="cohort-pip pip-d">Cohort D - Wk 2</span>
+        </div>
+        <svg class="week-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="week-detail">
+        <div class="detail-grid">
+          <div class="detail-block">
+            <h5>Cohort D (Nael) - Daily Schedule</h5>
+            <ul>
+              <li>Day 1: Agenda PPO + First 90 Seconds <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Day 2: Multi-Level SPI Discovery Framework <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Day 3: Discovery Trees + Chris Voss Labeling <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Day 4: Stack Rank + Harbour Tour <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Day 5: 5-Minute Drill + Discovery Cert Prep <span class="owner-tag tag-brendan">Brendan</span></li>
+            </ul>
+            <div class="cert-badge">Discovery Certification - End of Week</div>
+          </div>
+          <div class="detail-block">
+            <h5>Reinforcement: Advanced Cold Calling</h5>
+            <ul>
+              <li>Advanced Openers & Hooks <span class="owner-tag tag-self">Self-Study</span></li>
+              <li>Objection Handling Deep Dive <span class="owner-tag tag-mentor">Mentor</span></li>
+              <li>Email Sequence Strategy & HubSpot Setup <span class="owner-tag tag-self">Self-Study</span></li>
+              <li>Multi-Channel Cadence: Call + Email <span class="owner-tag tag-mentor">Mentor</span></li>
+              <li>Mock Calls + Cold Call Cert Prep <span class="owner-tag tag-mentor">Mentor</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEEK OF MAY 26-30 -->
+    <div class="week-row" onclick="this.classList.toggle('open')">
+      <div class="week-header">
+        <div class="week-number" style="background: var(--text-light)">3</div>
+        <div class="week-info">
+          <h4>Presentation</h4>
+          <div class="week-dates">May 26 - 30, 2026 <span style="font-size:0.7rem; color:var(--plum); margin-left:6px;">Memorial Day Mon 5/26</span></div>
+        </div>
+        <div class="week-cohorts">
+          <span class="cohort-pip pip-d">Cohort D - Wk 3</span>
+        </div>
+        <svg class="week-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="week-detail">
+        <div class="detail-grid">
+          <div class="detail-block">
+            <h5>Cohort D (Nael) - Schedule (4-day week)</h5>
+            <ul>
+              <li>Day 1 (Tue): Discovery Recap & Package Recommendation <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Day 2 (Wed): Vitable Product Deep Dive - VPC, MEC & MEC Plus <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Day 3 (Thu): Full mock presentation with feedback <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Day 4 (Fri): Presentation Cert <span class="owner-tag tag-brendan">Brendan</span></li>
+            </ul>
+            <div class="cert-badge">Presentation Certification - End of Week</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEEK OF JUN 2-6 -->
+    <div class="week-row" onclick="this.classList.toggle('open')">
+      <div class="week-header">
+        <div class="week-number" style="background: var(--text-light)">4</div>
+        <div class="week-info">
+          <h4>Demo Flow & Cert</h4>
+          <div class="week-dates">June 2 - 6, 2026</div>
+        </div>
+        <div class="week-cohorts">
+          <span class="cohort-pip pip-d">Cohort D - Wk 4</span>
+        </div>
+        <svg class="week-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="week-detail">
+        <div class="detail-grid">
+          <div class="detail-block">
+            <h5>Cohort D (Nael) - Daily Schedule</h5>
+            <ul>
+              <li>Day 1: Dashboard Demo + App Demo <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Day 2: Employee Enrollment Demo + Proposal Structure <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Day 3: Demo Cert <span class="owner-tag tag-brendan">Brendan</span></li>
+            </ul>
+            <div class="cert-badge">Demo Certification - Day 3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEEK OF JUN 9-13 -->
+    <div class="week-row" onclick="this.classList.toggle('open')">
+      <div class="week-header">
+        <div class="week-number" style="background: var(--text-light)">5</div>
+        <div class="week-info">
+          <h4>Pricing, Closing, & Negotiating</h4>
+          <div class="week-dates">June 9 - 13, 2026</div>
+        </div>
+        <div class="week-cohorts">
+          <span class="cohort-pip pip-d">Cohort D - Wk 5</span>
+        </div>
+        <svg class="week-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="week-detail">
+        <div class="detail-grid">
+          <div class="detail-block">
+            <h5>Cohort D (Nael) - Daily Schedule</h5>
+            <ul>
+              <li>Day 1: The 5-Minute Drill / Closing Framework <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Day 2: The Three Levers of Negotiation <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Day 3: Plans & Pricing <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Day 4: Competitors <span class="owner-tag tag-olivia">Olivia</span></li>
+              <li>Day 5: Closing Cert <span class="owner-tag tag-brendan">Brendan</span></li>
+            </ul>
+            <div class="cert-badge">Closing Certification - End of Week</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEEK OF JUN 16-20 -->
+    <div class="week-row" onclick="this.classList.toggle('open')">
+      <div class="week-header">
+        <div class="week-number" style="background: var(--text-light)">6</div>
+        <div class="week-info">
+          <h4>Plans & Pricing</h4>
+          <div class="week-dates">June 16 - 20, 2026</div>
+        </div>
+        <div class="week-cohorts">
+          <span class="cohort-pip pip-d">Cohort D - Wk 6</span>
+        </div>
+        <svg class="week-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="week-detail">
+        <div class="detail-grid">
+          <div class="detail-block">
+            <h5>Cohort D (Nael) - Schedule</h5>
+            <ul>
+              <li>Vitable Product Deep Dive - all plan types <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Building a Quote / Quote-to-Cash <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Shadow AE on live quote <span class="owner-tag tag-mentor">Mentor</span></li>
+              <li>Pricing Objections Role-Play <span class="owner-tag tag-olivia">Olivia</span></li>
+              <li>Practice building mock quote <span class="owner-tag tag-self">Self-Study</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEEK OF JUN 23-27 -->
+    <div class="week-row" onclick="this.classList.toggle('open')">
+      <div class="week-header">
+        <div class="week-number" style="background: var(--text-light)">7</div>
+        <div class="week-info">
+          <h4>Post Sale Process / New Clients</h4>
+          <div class="week-dates">June 23 - 27, 2026</div>
+        </div>
+        <div class="week-cohorts">
+          <span class="cohort-pip pip-d">Cohort D - Wk 7</span>
+        </div>
+        <svg class="week-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="week-detail">
+        <div class="detail-grid">
+          <div class="detail-block">
+            <h5>Cohort D (Nael) - Schedule</h5>
+            <ul>
+              <li>Closed Won Checklist + HubSpot Hygiene <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>CS Handoff Email Process <span class="owner-tag tag-olivia">Olivia</span></li>
+              <li>Welcome Call Scheduling + Pitch Deck <span class="owner-tag tag-mentor">Mentor</span></li>
+              <li>Client Referral Bonus Program <span class="owner-tag tag-self">Self-Study</span></li>
+              <li>HRA Intake Form + Money Movement <span class="owner-tag tag-brendan">Brendan</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEEK OF JUN 30 - JUL 3 -->
+    <div class="week-row" onclick="this.classList.toggle('open')">
+      <div class="week-header">
+        <div class="week-number" style="background: var(--text-light)">8</div>
+        <div class="week-info">
+          <h4>Guide to General Processes</h4>
+          <div class="week-dates">June 30 - July 3, 2026 <span style="font-size:0.7rem; color:var(--plum); margin-left:6px;">July 4th Fri</span></div>
+        </div>
+        <div class="week-cohorts">
+          <span class="cohort-pip pip-d">Cohort D - Wk 8 (Final)</span>
+        </div>
+        <svg class="week-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+      </div>
+      <div class="week-detail">
+        <div class="detail-grid">
+          <div class="detail-block">
+            <h5>Cohort D (Nael) - Schedule (4-day week)</h5>
+            <ul>
+              <li>HubSpot Mastery - pipeline, fields, hygiene <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Cross-Team Workflows: Finance, CS, Legal <span class="owner-tag tag-olivia">Olivia</span></li>
+              <li>Forecasting, Referrals & Reporting <span class="owner-tag tag-brendan">Brendan</span></li>
+              <li>Mock pipeline audit <span class="owner-tag tag-mentor">Mentor</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Certification Tracker -->
+  <div style="margin-bottom: 40px;">
+    <div class="section-title">Certification Tracker</div>
+    <div class="section-subtitle">5 certs across the program - all require 4+ star rating to pass</div>
+
+    <div class="cert-tracker">
+      <table>
+        <thead>
+          <tr>
+            <th>Rep</th>
+            <th>Cold Call<br><span style="opacity:0.7;font-size:0.6rem;">Week 1</span></th>
+            <th>Discovery<br><span style="opacity:0.7;font-size:0.6rem;">Week 2</span></th>
+            <th>Presentation<br><span style="opacity:0.7;font-size:0.6rem;">Week 3</span></th>
+            <th>Demo<br><span style="opacity:0.7;font-size:0.6rem;">Week 4</span></th>
+            <th>Closing<br><span style="opacity:0.7;font-size:0.6rem;">Week 5</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sydney DeGiacomo</td>
+            <td><span class="status-dot status-complete">&#10003;</span></td>
+            <td><span class="status-dot status-complete">&#10003;</span></td>
+            <td><span class="status-dot status-complete">&#10003;</span></td>
+            <td><span class="status-dot status-complete">&#10003;</span></td>
+            <td><span class="status-dot status-current">5</span></td>
+          </tr>
+          <tr>
+            <td>Derek Colantuono</td>
+            <td><span class="status-dot status-complete">&#10003;</span></td>
+            <td><span class="status-dot status-complete">&#10003;</span></td>
+            <td><span class="status-dot status-complete">&#10003;</span></td>
+            <td><span class="status-dot status-complete">&#10003;</span></td>
+            <td><span class="status-dot status-current">5</span></td>
+          </tr>
+          <tr>
+            <td>Katrina Przyblowicz</td>
+            <td><span class="status-dot status-complete">&#10003;</span></td>
+            <td><span class="status-dot status-complete">&#10003;</span></td>
+            <td><span class="status-dot status-complete">&#10003;</span></td>
+            <td><span class="status-dot status-complete">&#10003;</span></td>
+            <td><span class="status-dot status-current">5</span></td>
+          </tr>
+          <tr>
+            <td>Caleb Potaczek</td>
+            <td><span class="status-dot status-complete">&#10003;</span></td>
+            <td><span class="status-dot status-complete">&#10003;</span></td>
+            <td><span class="status-dot status-complete">&#10003;</span></td>
+            <td><span class="status-dot status-complete">&#10003;</span></td>
+            <td><span class="status-dot status-current">5</span></td>
+          </tr>
+          <tr>
+            <td>Mackenzie Voelker</td>
+            <td><span class="status-dot status-complete">&#10003;</span></td>
+            <td><span class="status-dot status-complete">&#10003;</span></td>
+            <td><span class="status-dot status-current">3</span></td>
+            <td><span class="status-dot status-upcoming"></span></td>
+            <td><span class="status-dot status-upcoming"></span></td>
+          </tr>
+          <tr>
+            <td>Sovannary Ouk</td>
+            <td><span class="status-dot status-complete">&#10003;</span></td>
+            <td><span class="status-dot status-complete">&#10003;</span></td>
+            <td><span class="status-dot status-current">3</span></td>
+            <td><span class="status-dot status-upcoming"></span></td>
+            <td><span class="status-dot status-upcoming"></span></td>
+          </tr>
+          <tr>
+            <td>Alex Sacharow <span style="font-size:0.7rem;color:var(--text-light);">(SDR promo)</span></td>
+            <td><span class="status-na">skip</span></td>
+            <td><span class="status-na">skip</span></td>
+            <td><span class="status-dot status-current">3</span></td>
+            <td><span class="status-dot status-upcoming"></span></td>
+            <td><span class="status-dot status-upcoming"></span></td>
+          </tr>
+          <tr>
+            <td>Davonte Scrafe <span style="font-size:0.7rem;color:var(--text-light);">(SDR promo)</span></td>
+            <td><span class="status-na">skip</span></td>
+            <td><span class="status-na">skip</span></td>
+            <td><span class="status-dot status-current">3</span></td>
+            <td><span class="status-dot status-upcoming"></span></td>
+            <td><span class="status-dot status-upcoming"></span></td>
+          </tr>
+          <tr>
+            <td>Nael Termanini <span style="font-size:0.7rem;color:var(--text-light);">(May 12 start)</span></td>
+            <td><span class="status-dot status-upcoming"></span></td>
+            <td><span class="status-dot status-upcoming"></span></td>
+            <td><span class="status-dot status-upcoming"></span></td>
+            <td><span class="status-dot status-upcoming"></span></td>
+            <td><span class="status-dot status-upcoming"></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Key Notes -->
+  <div class="notes-box">
+    <h4>Key Notes & Decisions</h4>
+    <ul>
+      <li><strong>Brendan</strong> leads all core training sessions (closing frameworks, discovery, demos, certs). This is intentional despite the calendar crunch.</li>
+      <li><strong>Olivia</strong> covers competitors, CS handoff process, cross-team workflows, pricing objection role-plays, and tech stack setup. Kept light so she stays focused on her current role.</li>
+      <li><strong>Brian is fully off</strong> - no training responsibilities going forward.</li>
+      <li><strong>Mentors (existing AEs)</strong> handle call shadowing, live quote walkthroughs, mock pipeline audits, and day-to-day coaching. Assign names above.</li>
+      <li><strong>Alex & Davonte (SDR promos)</strong> skip Weeks 1-2 and join Cohort B's schedule. Consider a 1-hour Discovery framework crash course before Week 3 starts.</li>
+      <li><strong>Nael (May 12)</strong> will be solo for Weeks 1-2. Consider pairing with a recently graduated Cohort A rep as an informal buddy.</li>
+      <li><strong>Holiday weeks:</strong> Memorial Day (May 26) and July 4th (July 4) fall within Cohort D's schedule - adjusted to 4-day weeks.</li>
+      <li><strong>Where cohorts overlap on the same week</strong> (e.g., Apr 7-11), training sessions can be combined where the content is identical to save Brendan's time.</li>
+    </ul>
+  </div>
+
+</div>
+
+<script>
+  function updateCounts() {
+    const selects = document.querySelectorAll('.mentor-select');
+    const counts = {};
+    selects.forEach(s => {
+      const val = s.value;
+      if (val) counts[val] = (counts[val] || 0) + 1;
+    });
+    const mentors = ['Olivia Berens', 'Marissa Makar', 'Jeremy Lopez', 'Carolina Castellanos'];
+    const parts = mentors.map(m => m + ' (' + (counts[m] || 0) + ')');
+    document.getElementById('mentor-counts').textContent = parts.join(' - ');
+  }
+</script>
+
+</body>
+</html>
