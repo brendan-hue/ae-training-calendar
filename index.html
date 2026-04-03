@@ -654,7 +654,7 @@
     <div class="mentor-grid">
       <div class="mentor-card">
         <div class="new-rep-name">Sydney DeGiacomo <span style="font-size:0.75rem;color:var(--text-light);">Cohort A</span></div>
-        <select class="mentor-select" onchange="updateCounts()">
+        <select class="mentor-select" data-rep="Sydney DeGiacomo" onchange="onMentorChange()">
           <option value="">Select mentor...</option>
           <option value="TBD">TBD</option>
           <option value="Olivia Berens" selected>Olivia Berens</option>
@@ -665,7 +665,7 @@
       </div>
       <div class="mentor-card">
         <div class="new-rep-name">Derek Colantuono <span style="font-size:0.75rem;color:var(--text-light);">Cohort A</span></div>
-        <select class="mentor-select" onchange="updateCounts()">
+        <select class="mentor-select" data-rep="Derek Colantuono" onchange="onMentorChange()">
           <option value="">Select mentor...</option>
           <option value="TBD">TBD</option>
           <option value="Olivia Berens">Olivia Berens</option>
@@ -676,7 +676,7 @@
       </div>
       <div class="mentor-card">
         <div class="new-rep-name">Katrina Przyblowicz <span style="font-size:0.75rem;color:var(--text-light);">Cohort A</span></div>
-        <select class="mentor-select" onchange="updateCounts()">
+        <select class="mentor-select" data-rep="Katrina Przyblowicz" onchange="onMentorChange()">
           <option value="">Select mentor...</option>
           <option value="TBD">TBD</option>
           <option value="Olivia Berens">Olivia Berens</option>
@@ -687,7 +687,7 @@
       </div>
       <div class="mentor-card">
         <div class="new-rep-name">Caleb Potaczek <span style="font-size:0.75rem;color:var(--text-light);">Cohort A</span></div>
-        <select class="mentor-select" onchange="updateCounts()">
+        <select class="mentor-select" data-rep="Caleb Potaczek" onchange="onMentorChange()">
           <option value="">Select mentor...</option>
           <option value="TBD">TBD</option>
           <option value="Olivia Berens">Olivia Berens</option>
@@ -698,7 +698,7 @@
       </div>
       <div class="mentor-card">
         <div class="new-rep-name">Mackenzie Voelker <span style="font-size:0.75rem;color:var(--text-light);">Cohort B</span></div>
-        <select class="mentor-select" onchange="updateCounts()">
+        <select class="mentor-select" data-rep="Mackenzie Voelker" onchange="onMentorChange()">
           <option value="">Select mentor...</option>
           <option value="TBD">TBD</option>
           <option value="Olivia Berens">Olivia Berens</option>
@@ -709,7 +709,7 @@
       </div>
       <div class="mentor-card">
         <div class="new-rep-name">Sovannary Ouk <span style="font-size:0.75rem;color:var(--text-light);">Cohort B</span></div>
-        <select class="mentor-select" onchange="updateCounts()">
+        <select class="mentor-select" data-rep="Sovannary Ouk" onchange="onMentorChange()">
           <option value="">Select mentor...</option>
           <option value="TBD">TBD</option>
           <option value="Olivia Berens">Olivia Berens</option>
@@ -720,7 +720,7 @@
       </div>
       <div class="mentor-card">
         <div class="new-rep-name">Alex Sacharow <span style="font-size:0.75rem;color:var(--text-light);">Cohort C - SDR Promo</span></div>
-        <select class="mentor-select" onchange="updateCounts()">
+        <select class="mentor-select" data-rep="Alex Sacharow" onchange="onMentorChange()">
           <option value="">Select mentor...</option>
           <option value="TBD">TBD</option>
           <option value="Olivia Berens" selected>Olivia Berens</option>
@@ -731,7 +731,7 @@
       </div>
       <div class="mentor-card">
         <div class="new-rep-name">Davonte Scrafe <span style="font-size:0.75rem;color:var(--text-light);">Cohort C - SDR Promo</span></div>
-        <select class="mentor-select" onchange="updateCounts()">
+        <select class="mentor-select" data-rep="Davonte Scrafe" onchange="onMentorChange()">
           <option value="">Select mentor...</option>
           <option value="TBD">TBD</option>
           <option value="Olivia Berens" selected>Olivia Berens</option>
@@ -742,7 +742,7 @@
       </div>
       <div class="mentor-card">
         <div class="new-rep-name">Nael Termanini <span style="font-size:0.75rem;color:var(--text-light);">Cohort D - May 12</span></div>
-        <select class="mentor-select" onchange="updateCounts()">
+        <select class="mentor-select" data-rep="Nael Termanini" onchange="onMentorChange()">
           <option value="">Select mentor...</option>
           <option value="TBD">TBD</option>
           <option value="Olivia Berens" selected>Olivia Berens</option>
@@ -1549,61 +1549,55 @@
   const BLOB_URL = 'https://jsonblob.com/api/jsonBlob/019d5571-3c1e-7c55-ade3-a0189145a62c';
   let saving = false;
 
-  function getRepName(select) {
-    const card = select.closest('.mentor-card');
-    const nameEl = card.querySelector('.new-rep-name');
-    return nameEl.childNodes[0].textContent.trim();
-  }
-
   function updateCounts() {
-    const selects = document.querySelectorAll('.mentor-select');
-    const counts = {};
-    selects.forEach(s => {
-      const val = s.value;
+    var selects = document.querySelectorAll('.mentor-select');
+    var counts = {};
+    for (var i = 0; i < selects.length; i++) {
+      var val = selects[i].value;
       if (val && val !== 'TBD') counts[val] = (counts[val] || 0) + 1;
-    });
-    const mentors = ['Olivia Berens', 'Marissa Makar', 'Jeremy Lopez', 'Carolina Castellanos'];
-    const parts = mentors.map(m => m + ' (' + (counts[m] || 0) + ')');
+    }
+    var mentors = ['Olivia Berens', 'Marissa Makar', 'Jeremy Lopez', 'Carolina Castellanos'];
+    var parts = [];
+    for (var j = 0; j < mentors.length; j++) {
+      parts.push(mentors[j] + ' (' + (counts[mentors[j]] || 0) + ')');
+    }
     document.getElementById('mentor-counts').textContent = parts.join(' - ');
   }
 
-  async function saveAssignments() {
+  function saveAssignments() {
     if (saving) return;
     saving = true;
-    const selects = document.querySelectorAll('.mentor-select');
-    const data = {};
-    selects.forEach(s => { data[getRepName(s)] = s.value; });
-    try {
-      await fetch(BLOB_URL, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-    } catch (e) { console.error('Save failed:', e); }
-    saving = false;
+    var selects = document.querySelectorAll('.mentor-select');
+    var data = {};
+    for (var i = 0; i < selects.length; i++) {
+      var rep = selects[i].getAttribute('data-rep');
+      data[rep] = selects[i].value;
+    }
+    fetch(BLOB_URL, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(function() { saving = false; }).catch(function(e) { console.error('Save failed:', e); saving = false; });
   }
 
-  async function loadAssignments() {
-    try {
-      const res = await fetch(BLOB_URL);
-      const data = await res.json();
-      const selects = document.querySelectorAll('.mentor-select');
-      selects.forEach(s => {
-        const rep = getRepName(s);
-        if (data[rep] !== undefined) s.value = data[rep];
-      });
-      updateCounts();
-    } catch (e) { console.error('Load failed:', e); }
+  function loadAssignments() {
+    fetch(BLOB_URL, { headers: { 'Accept': 'application/json' } })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        var selects = document.querySelectorAll('.mentor-select');
+        for (var i = 0; i < selects.length; i++) {
+          var rep = selects[i].getAttribute('data-rep');
+          if (data[rep] !== undefined) selects[i].value = data[rep];
+        }
+        updateCounts();
+      })
+      .catch(function(e) { console.error('Load failed:', e); });
   }
 
   function onMentorChange() {
     updateCounts();
     saveAssignments();
   }
-
-  document.querySelectorAll('.mentor-select').forEach(s => {
-    s.setAttribute('onchange', 'onMentorChange()');
-  });
 
   loadAssignments();
   setInterval(loadAssignments, 15000);
