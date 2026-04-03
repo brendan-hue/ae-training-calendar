@@ -1546,17 +1546,67 @@
 </div>
 
 <script>
+  const BLOB_URL = 'https://jsonblob.com/api/jsonBlob/019d5571-3c1e-7c55-ade3-a0189145a62c';
+  let saving = false;
+
+  function getRepName(select) {
+    const card = select.closest('.mentor-card');
+    const nameEl = card.querySelector('.new-rep-name');
+    return nameEl.childNodes[0].textContent.trim();
+  }
+
   function updateCounts() {
     const selects = document.querySelectorAll('.mentor-select');
     const counts = {};
     selects.forEach(s => {
       const val = s.value;
-      if (val) counts[val] = (counts[val] || 0) + 1;
+      if (val && val !== 'TBD') counts[val] = (counts[val] || 0) + 1;
     });
     const mentors = ['Olivia Berens', 'Marissa Makar', 'Jeremy Lopez', 'Carolina Castellanos'];
     const parts = mentors.map(m => m + ' (' + (counts[m] || 0) + ')');
     document.getElementById('mentor-counts').textContent = parts.join(' - ');
   }
+
+  async function saveAssignments() {
+    if (saving) return;
+    saving = true;
+    const selects = document.querySelectorAll('.mentor-select');
+    const data = {};
+    selects.forEach(s => { data[getRepName(s)] = s.value; });
+    try {
+      await fetch(BLOB_URL, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+    } catch (e) { console.error('Save failed:', e); }
+    saving = false;
+  }
+
+  async function loadAssignments() {
+    try {
+      const res = await fetch(BLOB_URL);
+      const data = await res.json();
+      const selects = document.querySelectorAll('.mentor-select');
+      selects.forEach(s => {
+        const rep = getRepName(s);
+        if (data[rep] !== undefined) s.value = data[rep];
+      });
+      updateCounts();
+    } catch (e) { console.error('Load failed:', e); }
+  }
+
+  function onMentorChange() {
+    updateCounts();
+    saveAssignments();
+  }
+
+  document.querySelectorAll('.mentor-select').forEach(s => {
+    s.setAttribute('onchange', 'onMentorChange()');
+  });
+
+  loadAssignments();
+  setInterval(loadAssignments, 15000);
 </script>
 
 </body>
